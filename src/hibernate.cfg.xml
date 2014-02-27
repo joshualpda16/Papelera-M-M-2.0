@@ -13,9 +13,9 @@
     <!-- mostrar consulta sql en consola-->
     <!--<property name="hbm2ddl.auto">update</property> create drop es para que cuando conecte mate las tablas y las cree denuevo-->
     
-    <mapping resource="mapeos/Rubros.hbm.xml"/>
-    <mapping resource="mapeos/SubRubros.hbm.xml"/>
-    <mapping resource="mapeos/Proveedores.hbm.xml"/>
-    <mapping resource="mapeos/Articulos.hbm.xml"/>
+    <mapping resource="mapeos/Rubro.hbm.xml"/>
+    <mapping resource="mapeos/SubRubro.hbm.xml"/>
+    <mapping resource="mapeos/Proveedor.hbm.xml"/>
+    <mapping resource="mapeos/Articulo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

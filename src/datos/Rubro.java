@@ -18,7 +18,7 @@ class Rubro {
     private String nombre;
     
     private Set<Articulo> articulos = new TreeSet<Articulo>();
-    private Set<Proveedor> proveedores = new TreeSet<Proveedor>();
+    private Set<SubRubro> subRubros = new TreeSet<SubRubro>();
 
     public Rubro() {
     }
@@ -51,15 +51,13 @@ class Rubro {
         this.articulos = articulos;
     }
 
-    public Set<Proveedor> getProveedores() {
-        return proveedores;
+    public Set<SubRubro> getSubRubros() {
+        return subRubros;
     }
 
-    public void setProveedores(Set<Proveedor> proveedores) {
-        this.proveedores = proveedores;
+    public void setSubRubros(Set<SubRubro> subRubros) {
+        this.subRubros = subRubros;
     }
-    
-    
     
 }
 

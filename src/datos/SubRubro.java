@@ -6,7 +6,7 @@
 
 package datos;
 
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -20,14 +20,14 @@ class SubRubro {
     private double precioCompra;
     private double precioVenta;
     private Rubro rubro;
-    private GregorianCalendar fecUltimaModif;
+    private Calendar fecUltimaModif;
     private double ultimoPorc;
     private Set<Articulo> articulos = new TreeSet<Articulo>();
 
     public SubRubro() {
     }
 
-    public SubRubro(String nombre, double precioCompra, double precioVenta, Rubro rubro, GregorianCalendar fecUltimaModif, double ultimoPorc) {
+    public SubRubro(String nombre, double precioCompra, double precioVenta, Rubro rubro, Calendar fecUltimaModif, double ultimoPorc) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
@@ -76,11 +76,11 @@ class SubRubro {
         this.rubro = rubro;
     }
 
-    public GregorianCalendar getFecUltimaModif() {
+    public Calendar getFecUltimaModif() {
         return fecUltimaModif;
     }
 
-    public void setFecUltimaModif(GregorianCalendar fecUltimaModif) {
+    public void setFecUltimaModif(Calendar fecUltimaModif) {
         this.fecUltimaModif = fecUltimaModif;
     }
 

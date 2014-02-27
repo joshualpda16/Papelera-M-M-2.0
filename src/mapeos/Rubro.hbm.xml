@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping> <!-- esta es la etiqueta root -->
+    <class name="datos.Rubro" table="rubro">
+        <id column="idRubro" name="idRubro">
+            <generator class="identity"/>
+        </id>
+        
+        <property column="nombre" name="nombre" type="string"/>
+        
+        <set name="articulos" table="articulos">
+            <key>
+                <column name="idRubro" />
+            </key>
+            
+            <one-to-many class="datos.Articulos" />
+        </set>
+        
+        <set name="subRubros" table="subRubro">
+            <key>
+                <column name="idRubro" />
+            </key>
+            
+            <one-to-many class="datos.SubRubro" />
+        </set>
+        
+    </class>
+</hibernate-mapping>
