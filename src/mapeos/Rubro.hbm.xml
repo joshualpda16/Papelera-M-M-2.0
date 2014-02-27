@@ -17,7 +17,7 @@
                 <column name="idRubro" />
             </key>
             
-            <one-to-many class="datos.Articulos" />
+            <one-to-many class="datos.Articulo" />
         </set>
         
         <set name="subRubros" table="subRubro">
