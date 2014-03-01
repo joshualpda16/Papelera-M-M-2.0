@@ -8,12 +8,26 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class ProveedoresDao {
+    
     private Session sesion;
     private Transaction tx;
     
     private void iniciaOperacion() throws HibernateException {
         sesion = HibernateUtil.getSessionFactory().openSession();
         tx = sesion.beginTransaction();
+    }
+    
+    public void actualizaProveedor(Proveedor prov) throws HibernateException {
+        try {
+            iniciaOperacion();
+            sesion.update(prov);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            sesion.close();
+        }
     }
     
     private void manejaExcepcion(HibernateException he) throws HibernateException {

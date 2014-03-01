@@ -10,7 +10,7 @@ package datos;
  *
  * @author joshua
  */
-class Articulo {
+public class Articulo {
     private int idArticulo;
     private String nombre;
     private int stock;

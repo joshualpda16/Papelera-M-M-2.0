@@ -120,6 +120,11 @@ public class Principal extends javax.swing.JFrame {
         mnuProvs.add(mnuProvAgregar);
 
         mnuProvListar.setText("Ver lista");
+        mnuProvListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProvListarActionPerformed(evt);
+            }
+        });
         mnuProvs.add(mnuProvListar);
 
         jMenuBar1.add(mnuProvs);
@@ -172,6 +177,10 @@ public class Principal extends javax.swing.JFrame {
     private void cmdProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdProveedoresActionPerformed
         singleton.ventanaVerProveedores(true);
     }//GEN-LAST:event_cmdProveedoresActionPerformed
+
+    private void mnuProvListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProvListarActionPerformed
+        singleton.ventanaVerProveedores(true);
+    }//GEN-LAST:event_mnuProvListarActionPerformed
 
     /**
      * @param args the command line arguments
