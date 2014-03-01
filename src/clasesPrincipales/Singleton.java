@@ -43,7 +43,7 @@ public class Singleton {
         } else{
             frmVerProv.dispose();
         }
-        Principal.mnuProvVer.setEnabled(!act);
+        Principal.mnuProvListar.setEnabled(!act);
         Principal.cmdProveedores.setEnabled(!act);
     }
 }

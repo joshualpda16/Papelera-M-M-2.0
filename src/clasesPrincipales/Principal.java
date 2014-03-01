@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package clasesPrincipales;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import otras.pintarJDP;
 
 /**
@@ -13,14 +14,17 @@ import otras.pintarJDP;
  * @author joshua
  */
 public class Principal extends javax.swing.JFrame {
+
     static public Singleton singleton = Singleton.getInstance();
-    
+
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
         jDesktopPane1.setBorder(new pintarJDP("/imagenes/fondo3.jpg"));
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/icono.png"));
+        setIconImage(icon);
     }
 
     /**
@@ -46,9 +50,9 @@ public class Principal extends javax.swing.JFrame {
         mnuArticulos = new javax.swing.JMenu();
         mnuArticulosAgregar = new javax.swing.JMenuItem();
         mnuArticulosVer = new javax.swing.JMenuItem();
-        mnuProveedores = new javax.swing.JMenu();
-        mnuProvVer = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuProvs = new javax.swing.JMenu();
+        mnuProvAgregar = new javax.swing.JMenuItem();
+        mnuProvListar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Papelera M&M 2.0");
@@ -110,15 +114,15 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuArticulos);
 
-        mnuProveedores.setText("Proveedores");
+        mnuProvs.setText("Proveedores");
 
-        mnuProvVer.setText("Agregar");
-        mnuProveedores.add(mnuProvVer);
+        mnuProvAgregar.setText("Agregar");
+        mnuProvs.add(mnuProvAgregar);
 
-        jMenuItem1.setText("Ver lista");
-        mnuProveedores.add(jMenuItem1);
+        mnuProvListar.setText("Ver lista");
+        mnuProvs.add(mnuProvListar);
 
-        jMenuBar1.add(mnuProveedores);
+        jMenuBar1.add(mnuProvs);
 
         setJMenuBar(jMenuBar1);
 
@@ -201,6 +205,7 @@ public class Principal extends javax.swing.JFrame {
             public void run() {
                 new Principal().setVisible(true);
             }
+
         });
     }
 
@@ -213,14 +218,14 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    public static javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     public static javax.swing.JMenuItem mnuArchivoConfig;
     public static javax.swing.JMenuItem mnuArchivoSalir;
     public static javax.swing.JMenu mnuArticulos;
     public static javax.swing.JMenuItem mnuArticulosAgregar;
     public static javax.swing.JMenuItem mnuArticulosVer;
-    public static javax.swing.JMenuItem mnuProvVer;
-    public static javax.swing.JMenu mnuProveedores;
+    public static javax.swing.JMenuItem mnuProvAgregar;
+    public static javax.swing.JMenuItem mnuProvListar;
+    public static javax.swing.JMenu mnuProvs;
     // End of variables declaration//GEN-END:variables
 }
