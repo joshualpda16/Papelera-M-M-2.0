@@ -13,13 +13,14 @@ import otras.pintarJDP;
  * @author joshua
  */
 public class Principal extends javax.swing.JFrame {
-
+    static public Singleton singleton = Singleton.getInstance();
+    
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        jDesktopPane1.setBorder(new pintarJDP("/imagenes/fondo.jpg"));
+        jDesktopPane1.setBorder(new pintarJDP("/imagenes/fondo3.jpg"));
     }
 
     /**
@@ -33,13 +34,24 @@ public class Principal extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         cmdAgregarArticulo = new javax.swing.JButton();
-        cmdAgregarArticulo1 = new javax.swing.JButton();
+        cmdVerArticulos = new javax.swing.JButton();
+        cmdVentaNueva = new javax.swing.JButton();
+        cmdProveedores = new javax.swing.JButton();
+        cmdPedidos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnuArchivoConfig = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuArchivoSalir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mnuArticulos = new javax.swing.JMenu();
+        mnuArticulosAgregar = new javax.swing.JMenuItem();
+        mnuArticulosVer = new javax.swing.JMenuItem();
+        mnuProveedores = new javax.swing.JMenu();
+        mnuProvVer = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Papelera M&M 2.0");
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -53,10 +65,30 @@ public class Principal extends javax.swing.JFrame {
         );
 
         cmdAgregarArticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mas-mini-mini.png"))); // NOI18N
+        cmdAgregarArticulo.setToolTipText("Agregar artículo nuevo");
 
-        cmdAgregarArticulo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa-mini.png"))); // NOI18N
+        cmdVerArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa-mini-mini.png"))); // NOI18N
+        cmdVerArticulos.setToolTipText("Ver lista de artículos");
+
+        cmdVentaNueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrito-mini-mini.png"))); // NOI18N
+        cmdVentaNueva.setToolTipText("Abrir venta nueva");
+
+        cmdProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prov-mini-mini.png"))); // NOI18N
+        cmdProveedores.setToolTipText("Agregar artículo nuevo");
+        cmdProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdProveedoresActionPerformed(evt);
+            }
+        });
+
+        cmdPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pin-mini.png"))); // NOI18N
+        cmdPedidos.setToolTipText("Agregar artículo nuevo");
 
         jMenu1.setText("Archivo");
+
+        mnuArchivoConfig.setText("Configuración");
+        jMenu1.add(mnuArchivoConfig);
+        jMenu1.add(jSeparator1);
 
         mnuArchivoSalir.setText("Salir");
         mnuArchivoSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +100,25 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mnuArticulos.setText("Articulos");
+
+        mnuArticulosAgregar.setText("Agregar");
+        mnuArticulos.add(mnuArticulosAgregar);
+
+        mnuArticulosVer.setText("Ver lista");
+        mnuArticulos.add(mnuArticulosVer);
+
+        jMenuBar1.add(mnuArticulos);
+
+        mnuProveedores.setText("Proveedores");
+
+        mnuProvVer.setText("Agregar");
+        mnuProveedores.add(mnuProvVer);
+
+        jMenuItem1.setText("Ver lista");
+        mnuProveedores.add(jMenuItem1);
+
+        jMenuBar1.add(mnuProveedores);
 
         setJMenuBar(jMenuBar1);
 
@@ -82,9 +131,15 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDesktopPane1)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdVentaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(cmdVerArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmdAgregarArticulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(cmdProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(cmdPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -94,7 +149,10 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdAgregarArticulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdVerArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdVentaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -106,6 +164,10 @@ public class Principal extends javax.swing.JFrame {
     private void mnuArchivoSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuArchivoSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_mnuArchivoSalirActionPerformed
+
+    private void cmdProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdProveedoresActionPerformed
+        singleton.ventanaVerProveedores(true);
+    }//GEN-LAST:event_cmdProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,12 +205,22 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdAgregarArticulo;
-    private javax.swing.JButton cmdAgregarArticulo1;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    public static javax.swing.JButton cmdAgregarArticulo;
+    public static javax.swing.JButton cmdPedidos;
+    public static javax.swing.JButton cmdProveedores;
+    public static javax.swing.JButton cmdVentaNueva;
+    public static javax.swing.JButton cmdVerArticulos;
+    public static javax.swing.JDesktopPane jDesktopPane1;
+    public static javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mnuArchivoSalir;
+    public static javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    public static javax.swing.JMenuItem mnuArchivoConfig;
+    public static javax.swing.JMenuItem mnuArchivoSalir;
+    public static javax.swing.JMenu mnuArticulos;
+    public static javax.swing.JMenuItem mnuArticulosAgregar;
+    public static javax.swing.JMenuItem mnuArticulosVer;
+    public static javax.swing.JMenuItem mnuProvVer;
+    public static javax.swing.JMenu mnuProveedores;
     // End of variables declaration//GEN-END:variables
 }
