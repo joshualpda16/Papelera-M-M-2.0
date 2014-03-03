@@ -10,8 +10,11 @@ import dao.ArticulosDao;
 import dao.ProveedoresDao;
 import datos.Articulo;
 import datos.Proveedor;
+import java.awt.Dialog;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -265,17 +268,43 @@ public class frmVerProv extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void txtTel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTel2ActionPerformed
-        if(lstProvs.getSelectedIndex()>0){
+        if (lstProvs.getSelectedIndex() > 0) {
             Guardar();
         }
     }//GEN-LAST:event_txtTel2ActionPerformed
 
+    public void elimProv() { //Este metodo se llama desde el JDialog eliminandoProveedor.
+
+    }
+
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
-        List<Articulo> arts = new ArticulosDao().traerArticulosDeProveedor(idList[lstProvs.getSelectedIndex()]);
-        if(arts.size()>0){
-            int opc = JOptionPane.showConfirmDialog(this,"Existen "+arts.size()+" artículos de este proveedor.\n\n"
+        Proveedor provSeleccionado = new ProveedoresDao().traerProveedor(idList[lstProvs.getSelectedIndex()]);
+        List<Articulo> arts = new ArticulosDao().traerArticulosDeProveedor(provSeleccionado.getIdProveedor());
+        int opc;
+        if (arts.size() > 0) {
+            opc = JOptionPane.showConfirmDialog(this, "Existen " + arts.size() + " artículos de este proveedor.\n\n"
                     + "Si elimina el proveedor de todas formas, estos artículos\nquedarán con proveedor sin especificar.\n\n"
-                    + "Lo quiere hacer de todas formas?","Confirme",JOptionPane.YES_NO_OPTION);
+                    + "Lo quiere hacer de todas formas?", "Confirme", JOptionPane.YES_NO_OPTION);
+            if (opc == 0) {
+                //Muestro el cuadro de dialogo
+                dialogos.eliminandoProveedor elimProv = new dialogos.eliminandoProveedor(new JFrame(), true, arts, provSeleccionado);
+                elimProv.setLocationRelativeTo(this);
+                dialogos.eliminandoProveedor.cmdVolver.setVisible(false);
+                dialogos.eliminandoProveedor.lblCarga.setVisible(true);
+                dialogos.eliminandoProveedor.barraProgreso.setMaximum(arts.size());
+                dialogos.eliminandoProveedor.barraProgreso.setMinimum(1);
+
+                elimProv.setVisible(true);
+
+                llenarLista();
+            }
+        } else {
+            opc = JOptionPane.showConfirmDialog(this, "Está a punto de eliminar al proveedor " + provSeleccionado.getNombre() + "\n\n"
+                    + "Está seguro?\n\n", "Confirme", JOptionPane.YES_NO_OPTION);
+            if (opc == 0) {
+                new ProveedoresDao().eliminarProveedor(provSeleccionado);
+                JOptionPane.showMessageDialog(this, "Proveedor eliminado", "Listo", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_cmdEliminarActionPerformed
 

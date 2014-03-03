@@ -30,6 +30,19 @@ public class ProveedoresDao {
         }
     }
     
+    public void eliminarProveedor(Proveedor prov) throws HibernateException {
+        try{
+            iniciaOperacion();
+            sesion.delete(prov);
+            tx.commit();
+        } catch (HibernateException he){
+            manejaExcepcion(he);
+            throw he;
+        } finally{
+            sesion.close();
+        }
+    }
+    
     private void manejaExcepcion(HibernateException he) throws HibernateException {
         tx.rollback();
         throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he);
