@@ -5,6 +5,10 @@
  */
 package clasesPrincipales;
 
+import dao.ArticulosDao;
+import dao.ProveedoresDao;
+import datos.Articulo;
+import datos.Proveedor;
 import java.awt.Image;
 import java.awt.Toolkit;
 import otras.pintarJDP;
@@ -42,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
         cmdVentaNueva = new javax.swing.JButton();
         cmdProveedores = new javax.swing.JButton();
         cmdPedidos = new javax.swing.JButton();
+        prueba = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuArchivoConfig = new javax.swing.JMenuItem();
@@ -53,6 +58,11 @@ public class Principal extends javax.swing.JFrame {
         mnuProvs = new javax.swing.JMenu();
         mnuProvAgregar = new javax.swing.JMenuItem();
         mnuProvListar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mnuRubrosAgregarRubro = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        cmdRubrosAgregarSubRubro = new javax.swing.JMenuItem();
+        mnuRubrosVer = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Papelera M&M 2.0");
@@ -87,6 +97,13 @@ public class Principal extends javax.swing.JFrame {
 
         cmdPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pin-mini.png"))); // NOI18N
         cmdPedidos.setToolTipText("Agregar artículo nuevo");
+
+        prueba.setText("Probar query update");
+        prueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pruebaActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Archivo");
 
@@ -129,6 +146,20 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuProvs);
 
+        jMenu2.setText("Rubros");
+
+        mnuRubrosAgregarRubro.setText("Ver rubros y sub-rubros");
+        jMenu2.add(mnuRubrosAgregarRubro);
+        jMenu2.add(jSeparator2);
+
+        cmdRubrosAgregarSubRubro.setText("Agregar rubro");
+        jMenu2.add(cmdRubrosAgregarSubRubro);
+
+        mnuRubrosVer.setText("Agregar sub-rubro");
+        jMenu2.add(mnuRubrosVer);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,19 +180,26 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(cmdProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(cmdPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(prueba)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdVerArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdVentaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdVerArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdVentaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(prueba)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -181,6 +219,15 @@ public class Principal extends javax.swing.JFrame {
     private void mnuProvListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProvListarActionPerformed
         singleton.ventanaVerProveedores(true);
     }//GEN-LAST:event_mnuProvListarActionPerformed
+
+    private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
+        Articulo art = new ArticulosDao().traerArticulo(1);
+        System.out.println(art.getProveedor().getNombre());
+//        art.setProveedor(new ProveedoresDao().traerProveedor(0));
+//        
+//        new ArticulosDao().actualizaArticulo(art);
+//        System.out.println(art.getProveedor().getNombre());
+    }//GEN-LAST:event_pruebaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,12 +269,15 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JButton cmdAgregarArticulo;
     public static javax.swing.JButton cmdPedidos;
     public static javax.swing.JButton cmdProveedores;
+    private javax.swing.JMenuItem cmdRubrosAgregarSubRubro;
     public static javax.swing.JButton cmdVentaNueva;
     public static javax.swing.JButton cmdVerArticulos;
     public static javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     public static javax.swing.JMenuItem mnuArchivoConfig;
     public static javax.swing.JMenuItem mnuArchivoSalir;
     public static javax.swing.JMenu mnuArticulos;
@@ -236,5 +286,8 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnuProvAgregar;
     public static javax.swing.JMenuItem mnuProvListar;
     public static javax.swing.JMenu mnuProvs;
+    private javax.swing.JMenuItem mnuRubrosAgregarRubro;
+    private javax.swing.JMenuItem mnuRubrosVer;
+    private javax.swing.JButton prueba;
     // End of variables declaration//GEN-END:variables
 }
